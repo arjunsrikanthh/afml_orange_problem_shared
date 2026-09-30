@@ -1,0 +1,6 @@
+# Reproduces the verified macOS Python 3.12 loader/smoke environment.
+# GPU teammates should select the official PyTorch build for their own hardware.
+numpy==2.5.3
+pandas==3.0.6
+torch==2.14.0
+sacrebleu==2.6.0

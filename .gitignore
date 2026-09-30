@@ -1,0 +1,16 @@
+# Never store competition data, generated outputs, checkpoints, or credentials.
+data/
+results/
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.csv
+credentials.json
+kaggle.json
+.env
+.venv/
+__pycache__/
+.DS_Store

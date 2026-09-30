@@ -1,0 +1,96 @@
+{
+  "artifacts": {
+    "restored_weights": {
+      "path": "results/reproduction/scalar_seed2301_restored.npy",
+      "sha256": "c80a69c57c8c997ae2e5f06abed3c3b47b4362ec7a62d3e309d562fbb6cf30ed"
+    },
+    "scalar_checkpoint": {
+      "path": "results/reproduction/scalar_seed2301/checkpoint.pt",
+      "sha256": "f2ef6af496ce0f2c21521560be30a8f384dfab7d90d93e6c0e06ce4ef3dc34bd"
+    },
+    "translation_checkpoint": {
+      "path": "results/linked_candidate/translation_scalar20/checkpoint_last.pt",
+      "sha256": "4f2d46f1bc3342de4be6065e68174afe214a00be7464c74fe87c4c8400ede6d2"
+    },
+    "translation_split": {
+      "path": "data/23_Team_Toxic/translation_split.json",
+      "sha256": "65fddacd277c3bdb87a7f3bb879dda220957ae5f8cdef966f5f3b1ee1abf92bf"
+    }
+  },
+  "audit_policy": "Single one-time reserved audit of this selected candidate; no tuning or reselection from audit outcomes. Scalar targets only held-out paired TRAIN positions across full training vector; test clean targets are unavailable.",
+  "audit_tool_review": {
+    "path": "reports/reviews/frozen_audit_implementation_20260930.md",
+    "sha256": "cc1c067c4575fca22e000ceb5635bf5eca011c7b2fe18137804643a5e3847b65"
+  },
+  "execution": {
+    "objective": "paired_mse",
+    "scalar_scheduler": "CosineAnnealingLR(T_max=2)",
+    "scalar_training_and_audit_device": "cpu",
+    "translation_device": "mps",
+    "translation_gradient_clip": 1.0,
+    "translation_optimizer": "AdamW",
+    "translation_scheduler": "constant"
+  },
+  "frozen_at": "2026-09-30T01:25:43.143681+00:00",
+  "input_sha256": {
+    "boilerplate.ipynb": "d99a021e8747bb9b69248ed586c664eda02fb56aa1fa5472e287b770c5a73d6c",
+    "test_queries.csv": "30ec797c5769b6a4e233a26aeaa3c38453e8645cc5db3045fcd08dc2a690e32f",
+    "test_weights_noisy.npy": "b751ffee729b96418148a7d7c684d3e8cc08ba46f0e225991f7a3811eb754397",
+    "train_parallel_corpus.csv": "39f3fd2d9bfb2804e4643072d515af054f1f4c34dbc05f05fea04e9d5e167171",
+    "train_weights_clean.npy": "aa8c6c8b743fc68cc0fa6dd7bb7a9690bbeace57894beec81d8f1d56a044edc4",
+    "train_weights_noisy.npy": "e5292a4b2f0c43e789f7bb2558d98fc2f11b7e9734eed28e77a78efddeae395a"
+  },
+  "recipe": {
+    "decoding": {
+      "max_len": 25,
+      "method": "greedy_argmax"
+    },
+    "scalar": {
+      "batch_size": 4096,
+      "chunk_size": 65536,
+      "epochs": 2,
+      "hidden": 32,
+      "learning_rate": 0.001,
+      "seed": 2301,
+      "weight_decay": 0.0
+    },
+    "translation": {
+      "batch_size": 8,
+      "device": "mps",
+      "epochs": 20,
+      "learning_rate": 0.0001,
+      "seed": 2301
+    }
+  },
+  "runtime_sha256": {
+    "scripts/audit_frozen_candidate.py": "34ec88b3461cbfa127d6ebb0a666128a4417f98b99cd0c7e6f55f46e095ab04b",
+    "scripts/compare_weight_candidates.py": "58980f5f75c5d2779ab6087c457f2a81f8083fa9af3b06e1350fbfea81c55d4c",
+    "scripts/export_scalar_weights.py": "f447e62f02c1697a36e846ae1dfb995636b6bf274cb1f0673ee65752a8a231f9",
+    "scripts/make_translation_split.py": "6d7f371d5587f9a97b5a34b11e1124659f069bd6eff86c7da5cad25ed794e3a8",
+    "scripts/team23_tokenizer.py": "0a688d66538ffbfa1dd8e0ffc8fe691766e178593fb051c90632df494986bb55",
+    "scripts/train_scalar_mlp.py": "a25a4b26c2898398b4aca1ffc6d1f40ef3e8fb2a50274551cbd4338663a283a9",
+    "scripts/train_translation.py": "931ff6603341f3c8c942ab2318a3d13f364c2b2e55359e019918198a331092b5",
+    "scripts/translation_checkpoint.py": "e077f3561d222bb157a562794f52f8ffaae147135584632be54cd45668faa38f",
+    "scripts/translation_noisy_baseline.py": "1c910fff41a634e2895ab9446a706a9c6e17adb258748a2aa86f4a1da6d57693",
+    "scripts/validate_translation_split.py": "a1e359d3c6b508b0d40108b5be1af18c620d8e213081e80089f50e0330f47949",
+    "scripts/weight_baselines.py": "9806251039cc316188e619d578ec981bdff2cf32954f4d04eb4d2c7ca39be6de"
+  },
+  "schema_version": 1,
+  "selection": {
+    "development_metrics": {
+      "cap_terminated": 3,
+      "chrf_plus_plus": 24.747068027819978,
+      "corpus_bleu4": 5.675658330404229,
+      "empty": 0,
+      "exact_matches": 0,
+      "repetitive": 1,
+      "rows": 45
+    },
+    "reason": "Original fixed seed2301 trained scalar meets task compliance; not stable affine superiority or best-of-two seed validation. Linked20 passes predeclared preserved epoch10 gate, trails affine20.",
+    "review": "reports/reviews/linked_candidate_review_20260930.md",
+    "review_sha256": "59c9a50728ec28bb8734b4911843ad1805c949fadd04d397fecdab52dd4ab773",
+    "translation_training_source_commit": "de9dc27ee0af76e11e7e488e9d047bfacbaabbb0"
+  },
+  "status": "frozen",
+  "team": 23
+}
