@@ -6,10 +6,8 @@ sanitized canonical notebook builder.
 
 Private project-management state, personal roster/SRN information, contribution
 records, research history, raw competition data, checkpoints, generated
-submissions, and Kaggle credentials are kept outside this repository in the
-private management repository:
-
-<https://github.com/arjunsrikanthh/afml_orange_problem_management>
+submissions, and Kaggle credentials are kept outside this repository in a
+separate private management repository.
 
 The final competition notebooks must receive the official team metadata through
 the private delivery process. This shared repository intentionally contains no
